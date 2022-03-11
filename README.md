@@ -26,18 +26,18 @@ struct Fizzbuzz<N: IsMod3 + IsMod5 + NotZero>(PhantomData<N>);
 
 #[test]
 fn test_fizz() {
-    Fizz::<N3>(PhantomData);
-    Fizz::<N6>(PhantomData);
+    let _: Fizz<N3>;
+    let _: Fizz<N6>;
 }
 
 #[test]
 fn test_buzz() {
-    Buzz::<N5>(PhantomData);
-    Buzz::<N10>(PhantomData);
+    let _: Buzz<N5>;
+    let _: Buzz<N10>;
 }
 
 #[test]
 fn test_fizzbuzz() {
-    Fizzbuzz::<N15>(PhantomData);
+    let _: Fizzbuzz<N15>;
 }
 ```
