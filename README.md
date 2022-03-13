@@ -18,11 +18,11 @@ type N13 = Succ<N12>;
 type N14 = Succ<N13>;
 type N15 = Succ<N14>;
 
-struct Fizz<N: IsMod3 + NotZero>(PhantomData<N>);
+struct Fizz<N: IsMod3 + IsNotZero>(PhantomData<N>);
 
-struct Buzz<N: IsMod5 + NotZero>(PhantomData<N>);
+struct Buzz<N: IsMod5 + IsNotZero>(PhantomData<N>);
 
-struct Fizzbuzz<N: IsMod3 + IsMod5 + NotZero>(PhantomData<N>);
+struct Fizzbuzz<N: IsMod3 + IsMod5 + IsNotZero>(PhantomData<N>);
 
 #[test]
 fn test_fizz() {
