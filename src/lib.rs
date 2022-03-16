@@ -10,25 +10,21 @@ impl Nat for Zero {}
 
 impl<N: Nat> Nat for Succ<N> {}
 
-trait IsNotZero {}
-
-impl<N: Nat> IsNotZero for Succ<N> {}
-
 trait IsMod3 {}
 
-impl IsMod3 for Zero {}
+impl IsMod3 for Succ<Succ<Succ<Zero>>> {}
 
 impl<N: Nat + IsMod3> IsMod3 for Succ<Succ<Succ<N>>> {}
 
 trait IsMod5 {}
 
-impl IsMod5 for Zero {}
+impl IsMod5 for Succ<Succ<Succ<Succ<Succ<Zero>>>>> {}
 
 impl<N: Nat + IsMod5> IsMod5 for Succ<Succ<Succ<Succ<Succ<N>>>>> {}
 
 #[cfg(test)]
 mod tests {
-    use crate::{IsMod3, IsMod5, IsNotZero, Succ, Zero};
+    use crate::{IsMod3, IsMod5, Succ, Zero};
     use std::marker::PhantomData;
 
     type N0 = Zero;
@@ -48,11 +44,11 @@ mod tests {
     type N14 = Succ<N13>;
     type N15 = Succ<N14>;
 
-    struct Fizz<N: IsMod3 + IsNotZero>(PhantomData<N>);
+    struct Fizz<N: IsMod3>(PhantomData<N>);
 
-    struct Buzz<N: IsMod5 + IsNotZero>(PhantomData<N>);
+    struct Buzz<N: IsMod5>(PhantomData<N>);
 
-    struct Fizzbuzz<N: IsMod3 + IsMod5 + IsNotZero>(PhantomData<N>);
+    struct Fizzbuzz<N: IsMod3 + IsMod5>(PhantomData<N>);
 
     #[test]
     fn test_fizz() {
